@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "./components/Header";
+import { Card } from "./components/Card";
 
 function App() {
   const [characters, setCharacters] = useState<any[]>([]);
@@ -33,9 +34,9 @@ function App() {
       {loading ? (
         <h2>LOADING</h2>
       ) : (
-        <div>
+        <div className="flex flex-wrap justify-center gap-8 mt-20">
           {characters.map((character) => (
-            <p>{character.name}</p>
+            <Card character={character} />
           ))}
         </div>
       )}
