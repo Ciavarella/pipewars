@@ -26,3 +26,8 @@ export interface Character {
   created: string;
   edited: string;
 }
+
+export interface DisplayAttribute {
+  label: string;
+  value: string | Array<string>;
+}

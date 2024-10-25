@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "./components/Header";
-import { Card } from "./components/Card";
+import { List } from "./components/List";
 
 function App() {
   const [characters, setCharacters] = useState<any[]>([]);
@@ -31,15 +31,7 @@ function App() {
     <div className="flex flex-col items-center bg-black text-white min-h-screen py-12 px-4">
       <Header query={searchQuery} searchChange={setSearchQuery} />
 
-      {loading ? (
-        <h2>LOADING</h2>
-      ) : (
-        <div className="flex flex-wrap justify-center gap-8 mt-20">
-          {characters.map((character) => (
-            <Card character={character} />
-          ))}
-        </div>
-      )}
+      {loading ? <h2>LOADING</h2> : <List characters={characters} />}
     </div>
   );
 }
