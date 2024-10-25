@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         "star-wars-yellow": "#ffe81f",
+        "star-wars-red": "#AC0607",
       },
     },
   },
