@@ -14,3 +14,19 @@ export const getCharacterAttributes = (
   { label: "Eye Color", value: character.eye_color },
   { label: "Movies", value: character.films },
 ];
+
+/**
+ *
+ * Util function to find search result
+ *
+ * @param characters List of characters
+ * @param query Searchquery to find characters
+ * @returns Array of characters
+ */
+export const filterCharacters = (
+  characters: Array<Character>,
+  query: string
+): Character[] =>
+  characters.filter((character) =>
+    character.name.toLowerCase().includes(query.toLowerCase())
+  );
