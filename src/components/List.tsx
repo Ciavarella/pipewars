@@ -8,7 +8,7 @@ interface ListProps {
 }
 
 export const List: React.FC<ListProps> = ({ characters }) => (
-  <div className="flex flex-wrap justify-center gap-8 mt-20">
+  <div className="flex flex-wrap justify-center gap-8 mt-18">
     {characters.map((character) => (
       <Card
         key={character.name}
