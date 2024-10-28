@@ -1,31 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { List } from "./components/List";
-import { fetchAllCharacters } from "./utils/api";
+import { loadInitialData } from "./utils/api";
 import { filterCharacters } from "./utils/utils";
 import { PageNumbers } from "./components/PageNumbers";
 import { usePagination } from "./hooks/usePagination";
+import { LightsaberLoader } from "./components/LightsaberLoader/LightsaberLoader";
+import { Character, DisplayData, Movie } from "./types";
 
 const ITEMS_PER_PAGE = 10;
 
 function App() {
-  const [characters, setCharacters] = useState<any[]>([]);
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const loadCharacters = async () => {
+    const loadCharactersAndMovies = async () => {
       setLoading(true);
       try {
-        const res = await fetchAllCharacters();
-        setCharacters(res);
+        const { characters, movies }: DisplayData = await loadInitialData();
+        setCharacters(characters);
+        setMovies(movies);
       } catch (err) {
         console.error(err);
       }
       setLoading(false);
     };
 
-    loadCharacters();
+    loadCharactersAndMovies();
   }, []);
 
   const filteredCharacters = filterCharacters(characters, searchQuery);
@@ -36,7 +40,11 @@ function App() {
     <div className="flex flex-col items-center bg-black text-white min-h-screen py-12 px-4">
       <Header query={searchQuery} onSearchChange={setSearchQuery} />
 
-      {loading ? <h2>LOADING</h2> : <List characters={pageCharacters} />}
+      {loading ? (
+        <LightsaberLoader />
+      ) : (
+        <List characters={pageCharacters} movies={movies} />
+      )}
 
       {filteredCharacters.length > ITEMS_PER_PAGE && (
         <PageNumbers
