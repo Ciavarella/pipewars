@@ -7,9 +7,12 @@ import { Character, DisplayAttribute } from "../types";
  */
 export const getCharacterAttributes = (
   character: Character,
-  movieUrlToTitle: Record<string, string>
+  movieUrlToTitle: Record<string, { title: string; release_date: string }>
 ): DisplayAttribute[] => {
-  const movieTitles = character.films.map((url) => movieUrlToTitle[url]);
+  const movieTitles = character.films.map((url) => {
+    const movie = movieUrlToTitle[url];
+    return `${movie.title} (${movie.release_date})`;
+  });
 
   return [
     { label: "Height", value: `${character.height}cm` },

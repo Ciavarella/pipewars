@@ -10,16 +10,16 @@ interface ListProps {
 
 export const List: React.FC<ListProps> = ({ characters, movies }) => {
   const movieUrlToTitle = useMemo(() => {
-    const urlTitleMap: Record<string, string> = {};
+    const urlTitleMap: Record<string, { title: string; release_date: string }> =
+      {};
     movies.forEach((movie) => {
-      urlTitleMap[movie.url] = movie.title;
+      urlTitleMap[movie.url] = {
+        title: movie.title,
+        release_date: movie.release_date,
+      };
     });
     return urlTitleMap;
   }, [movies]);
-
-  movies.forEach((movie) => {
-    movieUrlToTitle[movie.url] = movie.title;
-  });
 
   return (
     <div className="flex flex-wrap justify-center gap-8 mt-18">
