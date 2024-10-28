@@ -18,7 +18,7 @@ const AttributeList: React.FC<DisplayAttributeProps> = ({
       <div key={label} className="flex justify-between text-sm flex-wrap">
         <span className="text-black">{label}:</span>
         {Array.isArray(value) ? (
-          <ul className="font-medium text-star-wars-yellow list-inside">
+          <ul className="flex flex-col items-end font-medium text-star-wars-yellow list-inside">
             {value.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
@@ -36,9 +36,8 @@ export const Card: React.FC<CardProps> = ({ character, attributes }) => {
     <div className="bg-star-wars-red min-w-48 min-h-64 rounded-lg transform transition-all duration-300 hover:scale-110">
       <div className="p-6 h-full flex flex-col">
         <div className="flex items-center justify-center w-16 h-16 mx-auto mb-4 bg-white rounded-full">
-          {/* Add profile picture */}
           <img
-            src=""
+            src={`https://ui-avatars.com/api/?name=${character.name}`}
             alt={character.name}
             className="object-cover rounded-full w-full h-full"
           />
