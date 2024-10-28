@@ -1,4 +1,10 @@
-import type { Character, APIResponse } from "../types";
+import type {
+  Character,
+  DisplayData,
+  Movie,
+  MovieAPIResponse,
+  PeopleAPIResponse,
+} from "../types";
 
 /**
  * Util function to fetch all characters.
@@ -10,17 +16,37 @@ import type { Character, APIResponse } from "../types";
  *
  * @returns Array of Characters (all)
  */
-export async function fetchAllCharacters(): Promise<Character[]> {
-  let allCharacters: Array<Character> = [];
+export const fetchAllCharacters = async (): Promise<Character[]> => {
+  let allCharacters: Character[] = [];
   let url: string | null = "https://swapi.dev/api/people/";
 
   while (url) {
     const response = await fetch(url);
     if (!response.ok) throw new Error("Failed to fetch characters");
-    const res: APIResponse = await response.json();
+    const res: PeopleAPIResponse = await response.json();
     allCharacters = [...allCharacters, ...res.results];
     url = res.next;
   }
 
   return allCharacters;
-}
+};
+
+/**
+ * Function to get all movies.
+ *
+ * @returns Array of all movies
+ */
+export const fetchAllMovies = async (): Promise<Movie[]> => {
+  const response = await fetch("https://swapi.dev/api/films");
+  if (!response.ok) throw new Error("Failed to fetch movies");
+  const res: MovieAPIResponse = await response.json();
+  return res.results;
+};
+
+export const loadInitialData = async (): Promise<DisplayData> => {
+  const [characters, movies] = await Promise.all([
+    fetchAllCharacters(),
+    fetchAllMovies(),
+  ]);
+  return { characters, movies };
+};

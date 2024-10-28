@@ -1,7 +1,7 @@
 /**
  * Response from swapi api
  */
-export interface APIResponse {
+export interface PeopleAPIResponse {
   count: number;
   next: string | null;
   previous: string | null;
@@ -30,4 +30,32 @@ export interface Character {
 export interface DisplayAttribute {
   label: string;
   value: string | Array<string>;
+}
+
+export interface MovieAPIResponse {
+  count: number;
+  next: null;
+  previous: null;
+  results: Movie[];
+}
+export interface Movie {
+  characters: string[];
+  created: string;
+  director: string;
+  edited: string;
+  episode_id: number;
+  opening_crawl: string;
+  planets: string[];
+  producer: string;
+  release_date: string;
+  species: string[];
+  starships: string[];
+  title: string;
+  url: string;
+  vehicles: string[];
+}
+
+export interface DisplayData {
+  characters: Character[];
+  movies: Movie[];
 }
