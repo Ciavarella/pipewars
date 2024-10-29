@@ -2,6 +2,12 @@
 
 This is a star wars api webpage.
 
+## Deployed
+
+https://pipewars.netlify.app/
+
+---
+
 It shows:
 
 - A number of cards containing information about star wars characters
