@@ -1,14 +1,9 @@
 import React, { useMemo } from "react";
 import { Card } from "./Card";
-import type { Character, Movie } from "../types";
+import type { DisplayData } from "../types";
 import { getCharacterAttributes } from "../utils/utils";
 
-interface ListProps {
-  characters: Character[];
-  movies: Movie[];
-}
-
-export const List: React.FC<ListProps> = ({ characters, movies }) => {
+export const List: React.FC<DisplayData> = ({ characters, movies }) => {
   const movieUrlToTitle = useMemo(() => {
     const urlTitleMap: Record<string, { title: string; release_date: string }> =
       {};
